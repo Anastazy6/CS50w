@@ -1,0 +1,137 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% load index %}
+
+{% block title %}{{ auction.item_name }}{% endblock %}
+
+{% block body %}
+
+<h1 id="auction-name">{{ auction.item_name|title }}</h1>
+
+{% if user.is_authenticated %}
+  {% if auction.active or auction.on_watchlist %}
+    <form id="watchlist-form" method="POST">
+      {% csrf_token %}
+      {{ watchlist_switch }}
+      <input type="submit" name="watchlist-switch" 
+          value="{% if auction.on_watchlist %}Remove from watchlist{% else %}Add to watchlist{% endif %}">
+    </form>
+  {% endif %}
+{% endif %}
+
+{% if not auction.active %}
+  <h2>This auction is no longer active.</h2>
+{% endif %}
+
+<div class="auction">
+  <div class="auction-image">
+    {% if auction.image_url %}
+    <img src="{{ auction.image_url }}" alt="Image not working properly">
+    {% else %}
+    <img src="{% static 'auctions/media/no_image.png' %}">
+    {% endif %}
+  </div>
+  <div class="auction-data">
+    <div class="auction-category">
+      <a href="{% url 'view-category' auction.category %}">{{ auction.category }}</a>
+    </div>
+    <div class="auction-seller">
+      {{ auction.seller }}
+    </div>
+    <div class="auction-description">
+      {{ auction.description }}
+    </div>
+
+    {% if auction.is_biddable %}
+      <div class="auction-starting-price">
+        Starting price: {{ auction.starting_price }} $TN
+      </div>
+      <div class="auction-bid">
+        Highest bid:   {{ highest_bid|index:0 }} $TN
+        {% if user.is_superuser %} 
+          <span class="admin-only">by {{ highest_bid|index:1 }}.</span> 
+        {% endif %}
+        {% if auction.active %}
+          Bid more to get a chance to win the auction.
+        {% endif %}
+      </div>
+    {% else %} 
+      <div class="auction_unbiddable_info">
+        Bidding is unavailable for this auction. Want it? Buyout it!
+      </div>
+    {% endif %}
+
+    <div class="auction_buyout">
+      Buyout price:  {{ auction.buyout_price }} $TN
+      {% if auction.active %}
+        Pay this much to instantly win the auction.
+      {% endif %}
+    </div>
+    <div class="auction-creation-date">
+      Created: {{ auction.creation_date }}
+    </div>
+  </div>
+</div>
+
+{% if user.is_authenticated %}
+  {% if auction.active %}
+    
+    {% if user == auction.seller %}
+      <form action="" id="close-form" method="POST">
+        {% csrf_token %}
+        <input type="submit" name="submit-close" value="Close auction">
+      </form>
+    {% else %}    
+      {% if auction.is_biddable %}
+        <form action="" id="bid-form" method="POST">
+          {% csrf_token %}
+          {{ bid_form }}
+          <input type="submit" name="submit-bid" value="Bid">
+        </form>
+      {% endif %}
+      <form action="" id="buyout-form" method="POST">
+        {% csrf_token %}
+        <input type="submit" name="submit-buyout" value="Buyout">
+      </form>
+    {% endif %}
+
+  {% endif %}
+{% else %}
+  <h4><a href="{% url 'login' %}"> Login to bid or buy</a></h4>
+{% endif %}
+
+{% if not auction.active and auction.winner == user %}
+  <h3>You have won the auction!</h3>
+{% endif %}
+
+<section class="comments"> 
+  <h3>Comments</h3>
+
+  {% if auction.active and user.is_authenticated %}
+    <form action="" id="comment-form" method="POST">
+      {% csrf_token %}
+      {{ comment_form }}
+      <input type="submit" name="submit-comment" value="Submit comment">
+    </form>
+  {% endif %}
+
+  {% for comment in comments %}
+    <div class="comment-row">
+      <div class="comment-username">{{ comment.author.username }}</div>
+      <div class="comment-date">{{ comment.creation_date }}</div>
+      <div class="comment-value">{{ comment.value }}</div>
+    </div>
+  {% empty %}
+    <div class="comment-no-comment">There are no comments yet.</div>
+  {% endfor %}
+</section>
+
+{% if message %}
+  <div class="alert alert-info" role="alert">
+{{ message }}
+  </div>
+{% endif %}
+
+
+
+{% endblock %}

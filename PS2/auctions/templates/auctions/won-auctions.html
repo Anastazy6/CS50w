@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block title %}{{ user.username|title }} {{ page_name }}{% endblock %}
+
+{% block body %}
+    <h2 id="main-header">{{ user.username|title }} {{ page_name }}</h2>
+
+
+    {% for auction in auctions %}
+        {% include "./listing-data.html" %}
+    {% empty %}
+        <h1>No auctions</h1>
+    {% endfor %}
+    
+{% endblock %}

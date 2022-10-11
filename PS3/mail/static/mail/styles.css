@@ -1,0 +1,32 @@
+textarea {
+  min-height: 400px;
+}
+
+.mailbox-element {
+  display: inline-block;
+  width: 100%;
+  border: 1px solid black;
+  padding: 3px;
+}
+
+.mailbox-element-email {
+  float: left;
+  font-weight: bold;
+  width: 18%;
+  overflow: hidden;
+  color: #422137;
+  border-right: 1px solid #422137;
+}
+
+.mailbox-element-subject {
+  float: left;
+  padding-left: 3px;
+}
+
+.mailbox-element-time {
+  float: right;
+  color: cornflowerblue;
+  border-left: 1px solid cornflowerblue;
+  padding: 0px 3px;
+}
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,53 @@
+{% load static %}
+{% load index %}
+
+<div class="listing">
+    <div class="listing-image">
+        {% if auction.image_url %}
+        <img src="{{ auction.image_url }}" alt="Image not working properly">
+        {% else %}
+        <img src="{% static 'auctions/media/no_image.png' %}">
+        {% endif %}
+    </div>
+    <div class="listing-data">
+        <div class="listing-item">
+            <a href="{% url 'view-auction' auction.id %}">{{ auction.item_name|title }}</a>
+        </div>
+        <div class="listing-seller">
+            {% if user.id == auction.seller.id %}
+            <span id="seller-logged-in">Your auction</span>
+            {% else %}
+            By {{ auction.seller }}
+            {% endif %}
+        </div>
+
+        {% if auction.is_biddable %}
+            <div class="listing-starting-price">
+                Starting price: {{ auction.starting_price }} $TN
+            </div>
+            <div class="listing-highest-bid">
+                Highest bid: {{ auction.highest_bid|index:0 }} 
+                {% if user.is_superuser %} 
+                <span class="admin-only"> by {{ auction.highest_bid|index:1 }}.</span>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="listing-unbiddable-info">
+                UNBIDDABLE - buyout to get
+            </div>
+        {% endif %}
+
+        <div class="listing-buyout-price">
+            Buyout: {{ auction.buyout_price }} $TN
+        </div>
+        <div class="auction-category">
+            Category: <a href="{% url 'view-category' auction.category %}">{{ auction.category }}</a>
+        </div>
+        <div class="auction-creation-date">
+            Created {{ auction.creation_date }}
+        </div>
+    </div>
+    <div class="listing-description">
+        {{ auction.description }}
+    </div>
+</div>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <title>Search</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles.css"
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+      </head>
+    <body>
+
+      <ul id="top-bar" class="nav-bar">
+        <li><button id="login-button">Zaloguj się</button></li>
+        <li><svg id="trzy-kropki" class="gb_Ue" focusable="false" viewBox="0 0 24 24"><path d="M6,8c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM12,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM6,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM6,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM12,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM16,6c0,1.1 0.9,2 2,2s2,-0.9 2,-2 -0.9,-2 -2,-2 -2,0.9 -2,2zM12,8c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM18,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM18,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2z"></path></svg></li>
+        <li><a href="images.html">Grafika</a></li>
+        <li><a href="advanced.html">Szukanie zaawansowane</a></li>
+      </ul>
+
+      <div id="google-logo">
+        <img src="images/google_logo_dark.png" alt="GOOGLE"><br />
+      </div>
+
+      <div id="main">
+        <form action="https://google.com/search">
+          <div id="search-field">
+            <div id="lupa"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></div>
+            <input id="search-bar" class="" type="text" name="q">
+            <div id="niszczarka"></div>
+            <div id="klawiatura"></div>
+          </div>
+          <div id="search-buttons">
+            <input class="search-button" type="submit" value="Szukaj w Google">
+            <input class="search-button" type="submit" name="btnI" value="Szczęśliwy traf"> 
+          </div>
+        </form>
+      </div>
+
+
+      <div id="bottom-bar">
+        <div id="country-bar">
+          Polska
+        </div>
+
+        <div id="bottom-nav">
+          <ul id="lewa-dolna">
+            <li>
+              <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=webhp&cd=&cad=rja&uact=8&ved=0ahUKEwjcqsLcntT5AhXwsIsKHb6yAGQQkNQCCAw&url=https%3A%2F%2Fabout.google%2F%3Futm_source%3Dgoogle-PL%26utm_medium%3Dreferral%26utm_campaign%3Dhp-footer%26fg%3D1&usg=AOvVaw22tcV67ILx41HCroBODRdS">
+                O nas
+              </a>
+            </li>
+            <li>
+              <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=webhp&cd=&cad=rja&uact=8&ved=0ahUKEwjcqsLcntT5AhXwsIsKHb6yAGQQkdQCCA0&url=https%3A%2F%2Fwww.google.com%2Fintl%2Fpl_pl%2Fads%2F%3Fsubid%3Dww-ww-et-g-awa-a-g_hpafoot1_1!o2%26utm_source%3Dgoogle.com%26utm_medium%3Dreferral%26utm_campaign%3Dgoogle_hpafooter%26fg%3D1&usg=AOvVaw07LxD_MJO4tNv3OJCct8ld">
+                Reklamuj się
+              </a>
+            </li>
+            <li>
+              <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=webhp&cd=&cad=rja&uact=8&ved=0ahUKEwjcqsLcntT5AhXwsIsKHb6yAGQQktQCCA4&url=https%3A%2F%2Fwww.google.com%2Fservices%2F%3Fsubid%3Dww-ww-et-g-awa-a-g_hpbfoot1_1!o2%26utm_source%3Dgoogle.com%26utm_medium%3Dreferral%26utm_campaign%3Dgoogle_hpbfooter%26fg%3D1&usg=AOvVaw2SJ4zwRVXKyZr53qG9dm4K">
+                Dla firm
+              </a>
+            </li>
+            <li>
+              <a href="https://google.com/search/howsearchworks/?fg=1">
+                Jak działa wyszukiwarka
+              </a>
+            </li>
+          </ul>
+
+          <div id="carbon">
+            <a href="https://sustainability.google/intl/pl/carbon-free/?utm_source=googlehpfooter&utm_medium=housepromos&utm_campaign=bottom-footer&utm_content=#home">
+              <img src="images/google_leaf.png" alt="liść" style="width: 12px">
+              Neutralność węglowa od 2007 roku
+            </a>
+          </div>
+
+          <ul id="prawa-dolna">
+            <li>
+              <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=webhp&cd=&cad=rja&uact=8&ved=0ahUKEwjcqsLcntT5AhXwsIsKHb6yAGQQ8awCCBA&url=https%3A%2F%2Fpolicies.google.com%2Fprivacy%3Fhl%3Dpl%26fg%3D1&usg=AOvVaw0qMdXt5FzOHsApv3P_kwie">
+                Prywatność
+              </a>
+            </li>
+            <li>
+              <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=webhp&cd=&cad=rja&uact=8&ved=0ahUKEwjcqsLcntT5AhXwsIsKHb6yAGQQ8qwCCBE&url=https%3A%2F%2Fpolicies.google.com%2Fterms%3Fhl%3Dpl%26fg%3D1&usg=AOvVaw3dEcMTPyLkqzJsITIdrWl-">
+                Warunki
+              </a>
+            </li>
+            <li>
+              Ustawienia
+            </li>
+          </ul>
+        </div>
+      </div>
+    </body>
+</html>

@@ -1,0 +1,155 @@
+@font-face {
+  font-family: Canterbury;
+  src: url(canterbury.ttf);
+}
+
+$max-listing-height: 200px;
+$max-listing-image-width: 300px;
+$site-logo: 'images/pentagram.jpg';
+
+$style-font: Canterbury;
+$main-font: "Times New Roman";
+$secondary-font: "Helvetica";
+
+* {box-sizing: border-box;}
+
+body {
+  padding: 10px;
+  color: rgb(220, 20, 60); /* The world in crimson! */
+  background-color: black;
+  font-family: $main-font;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $style-font;
+}
+
+#title-header {
+  height: 80px;
+  text-align: center;
+  font-size: 60px;
+  font-family: $style-font;
+}
+
+#main-header {
+  font-family: $style-font;
+}
+
+.header-icon {
+  height: 80px;
+  width: 80px;
+  background-image: url("static/auctions/media/pentagram.png");
+}
+
+.listing {
+  box-sizing: content-box;
+  height: $max-listing-height;
+  margin-bottom: 10px;
+  margin-left: 2.5%;
+  margin-right: 10%;
+  display: block;
+  border: 1px solid crimson;
+}
+
+.listing-image {
+  text-align: center;
+  padding-top: 2px;
+  box-sizing: border-box;
+  width: $max-listing-image-width;
+  height: $max-listing-height;
+  float: left;
+  border-right: 1px solid crimson;
+
+  img {
+    box-sizing: border-box;
+    max-height: $max-listing-height - 5px;
+    max-width: $max-listing-image-width - 5px;
+  }
+}
+
+.listing-data {
+  padding-left: 5px;
+  float: left;
+  height: $max-listing-height;
+  width: $max-listing-image-width;
+}
+
+.listing-description {
+  border-left: 0.1px solid crimson;
+  height: $max-listing-height;
+  overflow: hidden;
+  padding: 5px;
+}
+
+.listing-item {
+  font-family: $style-font;
+}
+
+.auction-creation-date {
+  color: rgba(220, 20, 60, 0.5);
+}
+
+#auction-name {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.auction-data {
+  display: block;
+}
+
+.auction-image {
+  float: left;
+
+  img {
+    max-width: 666px;
+    max-height: 666px;
+  }
+}
+
+
+a {
+  text-decoration: underline dotted;
+  transition: 666ms;
+  &:link, &:visited {
+    color: orangered;
+    text-shadow:  0px 0px 4px navy,
+                  0px 0px 6px violet;
+}
+  /*
+  &:visited {
+    color: lightblue;
+    text-decoration: none;
+    text-shadow: 0px 0px 4px darkblue;
+  }
+  */
+
+  &:hover {
+    color: orangered;
+    text-shadow:  0px -2px 5px darkred,
+                  0px -5px 7px red,
+                  0px -8px 10px orangered,
+                  0px -11px 12px orange,
+                  0px -14px 14px yellow,
+                  0px -17px 17px palegoldenrod;
+  }
+
+  &:active {
+    text-shadow: 0px 0px 10px #eeff08 ;
+    color: #7fb40de1;
+  }
+}
+
+#seller-logged-in {
+  font-family: $style-font;
+  color: orangered;
+}
+
+.admin-only {
+  color: magenta !important;
+}
+
+span.admin-only {
+  font-family: $secondary-font;
+  font-size: 0.6em;
+}

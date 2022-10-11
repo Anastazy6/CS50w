@@ -1,0 +1,15 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    {% if entry %}
+        <h1>{{ title }}</h1>
+        <a href="{% url 'edit' title %}"">Wandalizuj</a><br/>
+        {{ entry|safe }}
+    {% else %}
+        <h1>Page <span style="color: red">{{ title }}</span> does not exist.</h1>
+    {% endif %}
+{% endblock %}

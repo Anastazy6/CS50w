@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block title %}Black market{% endblock %}
+
+{% block body %}
+    <h2 id="main-header">Active Listings</h2>
+
+    {% for auction in auctions %}
+        {% include "./listing-data.html" %}
+    {% empty %}
+        <h1>No auctions</h1>
+    {% endfor %}
+    
+{% endblock %}

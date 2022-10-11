@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block title %}Category: {{ category|title }}{% endblock %}
+
+{% block body %}
+    <h2 id="main-header">Category: {{ category|title }}</h2>
+
+    {% for auction in auctions %}
+        {% include "./listing-data.html" %}
+    {% empty %}
+        <h1>No auctions</h1>
+    {% endfor %}
+    
+{% endblock %}

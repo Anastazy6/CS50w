@@ -1,0 +1,11 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}404 auction not found {% endblock %}
+
+{% block body %}
+
+<h1>{{ message }}</h1>
+
+<h3><a href="{% url 'index' %}">Go back to the main page</a></h3>
+
+{% endblock %}

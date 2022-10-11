@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block title %}{{ user.username|title }} - watchlist{% endblock %}
+
+{% block body %}
+    <h2 id="main-header">{{ user.username|title }} - watchlist</h2>
+
+
+    {% for auction in watchlist %}
+        {% include "./listing-data.html" %}
+    {% empty %}
+        <h1>No auctions</h1>
+    {% endfor %}
+    
+{% endblock %}

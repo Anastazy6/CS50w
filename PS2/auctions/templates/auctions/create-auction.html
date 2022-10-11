@@ -1,0 +1,20 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+  <h1>Create Auction</h1>
+
+  {% if message %}
+  <div class="alert alert-danger" role="alert">
+  {{ message }}
+  </div>
+  {% endif %}
+
+  <form action="{% url 'create-auction' %}" method="POST" content="text/html; charset=UTF-8">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="satan">
+  </form>
+  
+  <h3>TODO</h3>
+{% endblock %}

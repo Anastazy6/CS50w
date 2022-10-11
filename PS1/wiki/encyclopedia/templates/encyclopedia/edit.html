@@ -1,0 +1,19 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Wandalizuj - {{ title }}
+{% endblock %}
+
+{% block body %}
+    <h1>Wandalizuj - {{ title }}</h1>
+
+
+    <!-- <form action="{6% url 'wandalizuj' entry %3}" method="POST"> -->
+    <form action="{% url 'edit' title %}" method="POST">
+      {% csrf_token %}
+
+      <textarea name="contents" cols="40" rows="10" required="" id="id_contents" value="">{{ initial_value }}</textarea>
+      <input type="submit">
+    </form>
+
+{% endblock %}
