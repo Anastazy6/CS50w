@@ -1,5 +1,47 @@
 {% extends "network/layout.html" %}
+{% load static %}
 
 {% block body %}
-    TODO
+    {% if user.is_authenticated %}
+        <button id="new-post-btn">New post</button>
+        <div id="new-post-view">
+            <div id="new-post-container">
+                <form id="new-post-form" action="">
+                    {% csrf_token %}
+                    {{ new_post_form }}
+                    <input type="submit" value="Submit">    
+                </form>
+                <button id="new-post-close-btn">&#10006</button>
+            </div>
+        </div>
+        <script src="{% static 'network/scripts/new_post.js' %}"></script>
+    {% endif %}
+    <div id="all-posts-view">
+        {% for post in posts %}
+            <div class="post">
+                <div class="post-title">
+                    {% if post.title %}
+                        {{ post.title }}
+                    {% else %}
+                        <span class="no-title">No title</span>
+                    {% endif %}
+                </div>
+                <div class="post-body">{{ post.body }}</div>
+                <div class="post-likes">
+                    <button class="like-button">&#128169&#128701</button> 0 likes
+                </div>
+                <div class="post-credentials">
+                    Created by <span class='author'>{{ post.author.username }}</span> on {{ post.timestamp }}
+                    {% if user == post.author %}
+                        <div class="post-edit">
+                            <a href="">&nbsp Edit</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% empty %}
+
+        {% endfor %}
+        <script src="{% static 'network/scripts/all_posts.js' %}"></script>
+    </div>
 {% endblock %}

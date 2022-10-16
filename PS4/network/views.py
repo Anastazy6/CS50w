@@ -1,14 +1,19 @@
-from django.contrib.auth import authenticate, login, logout
+import json
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 
 from .models import User
-
+from .modelforms import *
 
 def index(request):
-    return render(request, "network/index.html")
+    return render(request, "network/index.html", {
+        "new_post_form": NewPostForm,
+        "posts": Post.objects.all().order_by('-timestamp')
+    })
 
 
 def login_view(request):
@@ -61,3 +66,26 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "network/register.html")
+
+@login_required
+def new_post(request):
+    if request.method != 'POST':
+        return JsonResponse({"error": "POST request required."}, status=400)
+
+    data = json.loads(request.body)
+    
+    title = data.get("title", "")
+    body  = data.get("body",  "")
+
+    if body == None:
+        return JsonResponse({'error': "Post body required."}, status=400)
+    
+    new_post = Post(
+        title  = title,
+        body   = body,
+        author = request.user
+    )
+    new_post.save()
+    
+    return JsonResponse({'message': "Post created successfully!"}, status=200)
+

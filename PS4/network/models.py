@@ -8,13 +8,21 @@ class User(AbstractUser):
     #   Strona profilowa
     #   Followerzy
 
+#    def __str__(self) -> str:
+ #       return f'{self.username}'
+
     pass
 
 class Post(models.Model):
     author    = models.ForeignKey     (User, on_delete=models.CASCADE, related_name='posts')
     body      = models.CharField      (max_length=4096)
-    timestamp = models.DateTimeField  (auto_add_now=True)
-    likes     = models.ManyToManyField(User, on_delete=models.CASCADE, related_name='likes')
+    likes     = models.ManyToManyField(User, blank=True, related_name='likes')
+    timestamp = models.DateTimeField  (auto_now_add=True)
+    title     = models.CharField      (max_length=64, blank=True)
+    
+    def get_author(self):
+        return self.author
+        
     # TODO:
     #   Twórca
     #   Treść
@@ -23,9 +31,9 @@ class Post(models.Model):
     #   Opcjonalnie: tytuł posta
     #   Wyświetlanie: 10 na stronę
     #   Edycja posta: prawdopodobnie trzeba będzie użyć fetch(...{method: 'PUT'})
-    #     Za pomocą JavaScriptu ma się to odbywać BEZ przeładowywania strony
+    #     Za pomocą JavaScriptu ma  się to odbywać BEZ przeładowywania strony
     #     Zabezpieczyć przed edycją cudzego posta (dane identyfikacyjne posta nie powinny być dostępne w linku, ani w innych wrażliwych miejscach)
-    pass
+    
 
 class Follower(models.Model):
     following = models.ForeignKey     (User, on_delete=models.CASCADE, related_name='followers') # obserwujący
