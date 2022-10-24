@@ -3,13 +3,50 @@
           box-sizing: border-box;
 }
 
+.body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+@media screen and (max-width: 666px) {
+  .ads-left-xd {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 667px) {
+  .ads-left-xd {
+    display: block;
+    -webkit-box-ordinal-group: 1;
+        -ms-flex-order: 0;
+            order: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    height: 100%;
+    width: 200px;
+    background-color: red;
+  }
+}
+
+svg {
+  pointer-events: none;
+}
+
 #new-post-view {
   display: none;
   margin: auto;
   position: fixed;
   text-align: center;
   z-index: 1;
-  background-color: rgba(248, 248, 255, 0.8);
+  /*background-color: rgba($color: ghostwhite, $alpha: 0.8);*/
+  -webkit-backdrop-filter: blur(2.137px);
+          backdrop-filter: blur(2.137px);
   width: 100%;
   height: 100%;
 }
@@ -33,14 +70,61 @@
   overflow: wrap;
 }
 
+#new-post-btn {
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  text-align: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  z-index: 2137;
+}
+
+.content-wrapper {
+  position: relative;
+  margin: auto;
+  margin-left: 0;
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+}
+
+#posts-view {
+  position: relative;
+  margin: auto;
+  width: 100%;
+  padding: 5px 20px;
+}
+
 .post {
+  position: relative;
   display: block;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  max-width: 1000px;
-  margin: 5px 20px;
+  margin: 5px 0px;
   padding: 10px;
   overflow-wrap: break-word;
+}
+
+@media screen and (max-width: 666px) {
+  .post {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .post {
+    width: 100%;
+    min-width: 400px;
+    max-width: 750px;
+  }
+}
+
+@media screen and (min-width: 1101px) {
+  .post {
+    width: 800px;
+  }
 }
 
 .post-title {
@@ -66,5 +150,33 @@
 
 .like-button:focus {
   outline: none;
+}
+
+#follow-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#follow-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  background-image: url("https://static.thenounproject.com/png/4110874-200.png");
+  background-size: cover;
+}
+
+.title {
+  font-weight: 420.69;
+}
+
+.no-title {
+  color: rgba(0, 0, 0, 0.371);
+  font-style: italic;
+  font-weight: 213.7;
 }
 /*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,39 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+  {% if user.is_authenticated and user.id == profile.id %}
+  <script src="{% static 'network/scripts/edit_posts.js' %}"></script>
+    {% include './new_post.html' %}
+  {% endif %}
+
+  <div class="ads-left-xd"></div>
+  <div class="content-wrapper">
+
+    <h1 id="profile-header">{{ profile.username|title }}</h1>
+    
+    <div id="followers-wrapper">
+      Followers: {{ followers }}
+    </div>
+    <div id="following-wrapper">
+      Following: {{ following }}
+    </div>
+
+    {% if user.is_authenticated and not user.id == profile.id %}
+      {% include './follow.html' %}
+    {% endif %}
+
+    <h3 id="profile-posts-header">{{ profile.username|title }}'s posts</h3>
+    <div class="posts-view">
+      {% for post in page_obj %}
+        {% include "./post.html" %}
+      {% empty %}
+        [User] has not created any posts yet.
+      {% endfor %}
+
+      <div id="pagination-wrapper">
+        {% include './pagination.html' %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

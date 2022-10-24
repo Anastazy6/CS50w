@@ -1,0 +1,25 @@
+<div class="post">
+    <div class="post-title">
+        {% if post.title %}
+            <span class="title">{{ post.title }}</span>
+        {% else %}
+            <span class="no-title">No title</span>
+        {% endif %}
+    </div>
+    <div class="post-body">{{ post.body }}</div>
+    <div class="post-likes">
+        <button class="like-button">&#128169&#128701</button> 0 likes
+    </div>
+    <div class="post-credentials">
+        Created by 
+        <span class='author'>
+            <a href="{% url 'profile' post.author.id %}">{{ post.author.username }}</a>
+        </span> 
+        on {{ post.timestamp }}
+    </div>
+    {% if user == post.author %}
+    <button type="button" class="post-edit btn btn-sm btn-outline-primary">
+        Edit
+    </button>
+{% endif %}
+</div>
