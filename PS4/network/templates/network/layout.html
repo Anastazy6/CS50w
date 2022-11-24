@@ -5,16 +5,25 @@
     <head>
         <title>{% block title %}Social Network{% endblock %}</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link href="{% static 'network/styles.css' %}" rel="stylesheet">
-        <!-- React JS -->
-        <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
-        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
-        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <meta name="referrer" content="same-origin"/>
+        <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/231/231747.png" type="image/x-icon">
+        <link rel="stylesheet"    href="{% static 'network/styles.css' %}">
+        <link rel="stylesheet"    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <script src="{% static 'network/scripts/reactions.js' %}"></script>
+        {% if user.is_authenticated %}
+            <script src="{% static 'network/scripts/edit_posts.js' %}"></script>
+            <script src="{% static 'network/scripts/like.js' %}"></script>
+            <script src="{% static 'network/scripts/new_post.js' %}"></script>
+        {% endif %}
+        <script src="{% static 'network/scripts/util.js' %}"></script>
+
     </head>
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light"> <!-- class-trash-bin: {} -->
             <a class="navbar-brand" href="{% url 'index' %}">Network</a>
           
             <div>
@@ -54,6 +63,8 @@
           </nav>
         
         <div class="body">
+            {% include './reactions_interface.html' %}
+            
             {% block body %}
             {% endblock %}
         </div>

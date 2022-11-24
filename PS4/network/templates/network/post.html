@@ -1,15 +1,66 @@
-<div class="post">
+<div class="post" id="post-{{ post.id }}" data-postid="{{ post.id }}">    
+
+
+    {% if user == post.author %}
+        <form class="edit-form" action="{% url 'edit-post' post.id %}">
+            {% csrf_token %}
+            <!--Sure, with dev tools, you can modify it along with the form action value
+                so as to edit another post, but why? Editing other users' posts is
+                disabled on server side anyway...-->
+            <input readonly hidden type="number" name="post-id" value="{{ post.id }}">
+            
+            <div class="input-fields"></div>
+        </form>
+    {% endif %}
+
+
     <div class="post-title">
         {% if post.title %}
-            <span class="title">{{ post.title }}</span>
+            <span class="has-title">{{ post.title }}</span>
         {% else %}
             <span class="no-title">No title</span>
         {% endif %}
     </div>
-    <div class="post-body">{{ post.body }}</div>
+
+
+    <div class="post-body">{{ post.body|linebreaks }}</div>
+
+
     <div class="post-likes">
-        <button class="like-button">&#128169&#128701</button> 0 likes
+        {% if user.is_authenticated and not user == post.author %}
+            <form class="like-form" action="{% url 'like-post' post.id %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" class="like-button" value="&#128169&#128701">
+            </form>
+        {% endif %}
+        <span class="likes-counter">
+            {{ post.total_likes }}
+            like{% if post.total_likes != 1 %}s{% endif %}
+        </span>
     </div>
+
+
+
+    <div class="post-reactions-wrapper">
+        <div class="post-reactions-container">
+            <div class="post-reactions-interface">
+                
+                {% if user.is_authenticated and not user == post.author %}
+                <div class="add-stuff-button reaction-btn" title="React to the post" data-postid="{{ post.id }}">
+                    <svg id="reaction-interface-opener" width="20" height="20"
+                        {% include './add_stuff_svg_guts.html' %}
+                    </svg>
+                </div>
+                {% endif %}
+
+                <div class="reactions-announcer"> Reactions:</div>
+            </div>
+            <div class="post-reactions"></div>
+        </div>
+    </div>
+
+
+
     <div class="post-credentials">
         Created by 
         <span class='author'>
@@ -18,8 +69,9 @@
         on {{ post.timestamp }}
     </div>
     {% if user == post.author %}
-    <button type="button" class="post-edit btn btn-sm btn-outline-primary">
-        Edit
-    </button>
-{% endif %}
+        <button type="button" class="post-edit btn btn-sm btn-outline-primary" value="Edit">
+            Edit
+        </button>
+    {% endif %}
+
 </div>

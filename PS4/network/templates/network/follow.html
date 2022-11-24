@@ -1,9 +1,12 @@
+{% load static %}
+
 <div id="follow-wrapper">
-  <form id="follow-form">
-    {% csrf_token %}
-    <input readonly hidden name="follower" value="{{ request.user.id }}" type="text">
-    <input readonly hidden name="followed" value="{{ profile.id }}" type="text">
-    {{ follow_button }}<input type='submit' id="follow-btn">
-  </form>
-  <script src="{% static 'network/scripts/follow.js' %}" ></script>
+    <form id="follow-form">
+        {% csrf_token %}
+        <input readonly hidden name="follower" value="{{ request.user.id }}" type="text">
+        <input readonly hidden name="followed" value="{{ profile.id }}" type="text">
+        <span id="follow-method">{{ follow_method }}</span>
+        <input type='submit' id="follow-btn">
+    </form>
+    <script src="{% static 'network/scripts/follow.js' %}" ></script>
 </div>

@@ -1,16 +1,32 @@
+$navbar-light-brand-color: white;
+
 $main-z-index: 0;
+$papaj: #04022137;
+$default-font-size: 16px;
+
+$main-font: Helvetica, sans-serif;
+$header-font: "Times new roman", serif;
 
 * {
   box-sizing: border-box;
 }
 
-// New post section
+//////////////////////////////////////////////////////////////////////
+/////////////////////////// New post section /////////////////////////
+//////////////////////////////////////////////////////////////////////
 
 .body {
   display: flex;
   flex-direction: row;
+  font-size: $default-font-size;
+  font-family: $main-font;
+  margin-top: 3%;
+
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: $header-font;
+}
 
 @media screen and (max-width: 666px) {
   
@@ -37,7 +53,7 @@ svg {
   pointer-events: none;
 }
 
-#new-post-view {
+#new-post-view, #reactions-interface-container {
   display: none;
   margin: auto;
   position: fixed;
@@ -49,7 +65,7 @@ svg {
   height: 100%;
 }
 
-#new-post-container {
+#new-post-container, #reactions-interface-wrapper {
   max-width: 600px;
   max-height: 450px;
   border: 1px solid black;
@@ -80,8 +96,10 @@ svg {
   z-index: $main-z-index + 2137;
 }
 
+///////////////////////////////////////////////////////////////
+///////////////////////  Post section  ////////////////////////
+///////////////////////////////////////////////////////////////
 
-// Post section
 
 .content-wrapper {
   position: relative;
@@ -97,15 +115,16 @@ svg {
   padding: 5px 20px;
 }
 
-
 .post {
   position: relative;
   display: block;
   border: 1px solid rgba($color: black, $alpha: 0.3);
   border-radius: 10px;
-  margin: 5px 0px;
+  margin: 10px 0px;
   padding: 10px;
   overflow-wrap: break-word;
+  background-color: ghostwhite;
+  box-shadow: 2px 4px 21.37px $papaj;
 }
 
 @media screen and (max-width: 666px) {
@@ -131,6 +150,8 @@ svg {
 .post-title {
   max-width: 100%;
   border-bottom: 1px solid rgba($color: black, $alpha: 0.1);
+  font-family: $header-font;
+  font-size: 1.2em;
 }
 
 .post-credentials {
@@ -158,7 +179,7 @@ svg {
 }
 
 #follow-btn {
-  width: 30px;
+  width:  30px;
   height: 30px;
   border: none;
   background-color: transparent;
@@ -166,12 +187,133 @@ svg {
   background-size: cover;
 }
 
-.title {
+.has-title {
   font-weight: 420.69;
 }
 
-.no-title {
+.no-title, .no-reactions {
   color: rgba(0, 0, 0, 0.371);
   font-style: italic;
   font-weight: 213.7;
+}
+
+.post-edit-title {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.post-edit-body {
+  width: 100%;
+  resize: none;
+  overflow: hidden;
+  white-space: pre-wrap;
+}
+
+.post-likes {
+  display: flex;
+}
+
+input.like-button {
+  margin-right: 10px;
+}
+
+.reaction {
+  display: inline-flex;
+  margin-left: 10px;
+
+  &:after {
+    position: absolute;
+
+    content: attr(data-count);
+    font-size: 0.4em;
+    background-color: rgb(47, 0, 91);
+    color: ghostwhite;
+    border-radius: 2137px;
+    height: fit-content;
+    width: fit-content;
+    object-fit: cover;
+    padding: 0 5px;
+  }
+}
+
+.post-reactions-wrapper {
+  max-width: 100%;
+  margin-top: 25px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+
+}
+
+.post-reactions-container {
+  vertical-align: middle;
+  display: inline-flex;
+}
+
+.post-reactions-interface {
+  display: inline-flex;
+  transform: translateY(18%);
+}
+
+
+.reaction-btn {
+  position: relative;
+  transform: translateY(-3%);
+}
+
+.reactions-announcer {
+  margin-left: 5px;
+  height: fit-content;
+}
+
+.reaction-category {
+  z-index: 3241234646763;
+  font-size: 2em;
+}
+
+.reaction-active {
+  box-shadow: 0px 0px 15px springgreen inset;
+  border-radius: 2137px;
+}
+
+.no-reactions {
+  position: relative;
+  font-size: $default-font-size - 2px;
+  margin-left: 10px;
+  top: -10%;
+}
+
+#reactions-interface {
+  display: flex;
+
+  & .reaction-category :hover {
+    transform:    scale(3);
+    -o-transform: scale(3);
+    cursor: pointer;
+
+    & span {
+      font-size: 1.1em;
+    }
+  }
+}
+
+.post-reactions {
+  font-size: 1.61803398874989484820458683436563811772030917980576286213544862270526046281890244970720720418939113748475em; // Golden ratio. Quite accurate, isn't it?
+  vertical-align: middle;
+}
+
+.post-credentials {
+  font-size: 0.8em;
+}
+
+input, textarea {
+  background-color: #009bff08;
+}
+
+input {
+  border-radius: 5px;
+}
+
+textarea {
+  border-radius: 10px;
 }

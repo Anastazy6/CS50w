@@ -1,41 +1,19 @@
 {% load static %}
 
-<div id="new-post-btn" title="Add a new post">
-  
-  <svg 
-      xmlns="http://www.w3.org/2000/svg" 
-      x="0px" y="0px"
-      width="40" height="40"
-      viewBox="0 0 80 80"
-      style=" fill:#000000;">
-      <path id="new-post-btn-background" 
-            fill="powderblue" 
-            d="M40,77.5C19.322,77.5,2.5,60.678,2.5,40S19.322,2.5,40,2.5S77.5,19.322,77.5,40S60.678,77.5,40,77.5 z">
-      </path>
-      <path id="new-post-btn-border"
-            fill="aqua" 
-            d="M40,3c20.402,0,37,16.598,37,37S60.402,77,40,77S3,60.402,3,40S19.598,3,40,3 M40,2 C19.013,2,2,19.013,2,40s17.013,38,38,38s38-17.013,38-38S60.987,2,40,2L40,2z">
-      </path>
-      <path id="new-post-btn-horizontal" 
-            fill="#fff" 
-            d="M20 36H60V44H20z">
-      </path>
-      <path id="new-post-btn-vertical"   
-            fill="#fff" 
-            d="M20 36H60V44H20z" 
-            transform="rotate(90 40 40)">
-      </path>
-  </svg>
+<div id="new-post-btn" class="add-stuff-button" title="Add a new post">
+    <svg id="new-post-interface-opener" width="40" height="40"
+        {% include './add_stuff_svg_guts.html' %}
+    </svg>
+</div>
 
-</div>
+
 <div id="new-post-view">
-  <div id="new-post-container">
-      <form id="new-post-form" action="">
-          {% csrf_token %}
-          {{ new_post_form }}
-          <input type="submit" value="Submit">    
-      </form>
-      <button id="new-post-close-btn">&#10006</button>
-  </div>
+    <div id="new-post-container">
+        <form id="new-post-form" action="">
+            {% csrf_token %}
+            {{ new_post_form }}
+            <input type="submit" value="Submit">    
+        </form>
+        <button id="new-post-close-btn">&#10006</button>
+    </div>
 </div>
-<script src="{% static 'network/scripts/new_post.js' %}"></script>

@@ -2,20 +2,20 @@
 
 {% block body %}
 
-  <div class="ads-left-xd"></div>
+    <div class="ads-left-xd"></div>
 
-  <div class="content-wrapper">
-    <h1>{{ user.username|title }}'s feed</h1>
+    <div class="content-wrapper">
+        <h1>{{ user.username|title }}'s feed</h1>
 
-    <div class="posts-view">
-    {% for post in page_obj %}
-      {% include "./post.html" %}
-    {% empty %}
-      No posts
-    {% endfor %}
-      <div id="pagination-wrapper">
-        {% include './pagination.html' %}
-      </div>
+        <div class="posts-view">
+        {% for post in page_obj %}
+            {% include "./post.html" %}
+        {% empty %}
+            No posts
+        {% endfor %}
+            <div id="pagination-wrapper">
+                {% include './pagination.html' %}
+            </div>
+        </div>
     </div>
-  </div>
 {% endblock %}

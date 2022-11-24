@@ -10,15 +10,11 @@ class NewPostForm(forms.ModelForm):
                                                 'cols'       : 60,
                                                 'rows'       : 6,
                                                 'placeholder': 'Type your post here (up to 4096 characters).',
-                                                'style'      : 'resize: none;'
+                                                'style'      : 'resize: none;',
+                                                'wrap'       : 'hard'
                                     }),
                     'title': TextInput(attrs={  'id'         : "new-post-title",
                                                 'placeholder': 'Title (optional, up to 64 characters).',
                                                 'size'       : 60})
                 }
         labels  = {'title': '', 'body': ''}
-
-#class FollowForm(forms.ModelForm):
-#   class Meta:
-#           model   = Follower
-#   pass
