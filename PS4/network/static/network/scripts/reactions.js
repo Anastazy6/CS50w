@@ -1,11 +1,7 @@
 $(document).ready(function() {
-
-
-
   /**************************************************
   ***                  Variables                  ***
   ***************************************************/
-
 
   const CSRFToken = document.querySelector("#reactions-csrf-token > [name=csrfmiddlewaretoken]")
   const posts     = document.querySelectorAll('.post');
@@ -27,23 +23,22 @@ $(document).ready(function() {
   function createReactionsInterface(postId, activeReaction) {
     const post      = document.querySelector(`#post-${postId}`);
     const reactions = JSON.parse(sessionStorage.getItem('knownReactions'));
-
+    
     reactionsInterface.innerHTML = '';
     reactionsInterfaceContainer.style.display = 'block';
-
-
+    
     Object.entries(reactions).forEach(([id, _]) => {
       const reaction = document.createElement('div');
-
+      
       reaction.setAttribute ( 'title', reactions[id]['reaction']);
       reaction.classList.add( 'reaction-category');
       reaction.dataset.id   =  parseInt(id);
       reaction.innerHTML    = `<span class="reaction-emoji">${reactions[id]['emoji']}</span>`
       if (activeReaction === reaction.title) { reaction.classList.add('reaction-active'); }
-
+      
       reactionsInterface.append(reaction);
     })
-
+    
     reactionsInterface.childNodes.forEach(reaction => {
       $(reaction).click(function(){
         fetch(`/react/${postId}`, {
@@ -59,7 +54,6 @@ $(document).ready(function() {
         })
         .then(response => response.json())
         .then(_ => {
-          console.log(result)
           getReactions(post);
           // Both will close the reactions interface, the second one is just a fallback. View "./util.js" for more details.
           $('#add-reactions-close-btn').click() || reactionsInterfaceContainer.click(); 
@@ -72,24 +66,29 @@ $(document).ready(function() {
   function updateKnownReactions() {
     fetch('/get-rcategories')
     .then(response => response.json())
-    .then(result => {      
-      sessionStorage.setItem('knownReactions', JSON.stringify(result));
+    .then(result => {
+      if (!result['unauthenticated']) {
+        sessionStorage.setItem('knownReactions', JSON.stringify(result));
+      }
     });
   }
 
 
   function getReactions(post) {
+    const reactionButton = post.querySelector('.reaction-btn');
+    
     fetch(`/get_reactions/${post.dataset.postid}`)
     .then(response => response.json())
     .then(result => {
-
+      if (reactionButton) { reactionButton.dataset.reaction = ''; }
+      
       if ($.isEmptyObject(result)) {
         post.querySelector('.post-reactions').innerHTML =
           '<span class="no-reactions">No reactions</span>';
-
+        
       } else {
         post.querySelector('.post-reactions').innerHTML = ''; // Clear reactions' field
-
+        
         Object.keys(result).forEach(key => {
           let reaction = document.createElement("div");
           post.querySelector('.post-reactions').append(reaction);
@@ -100,7 +99,7 @@ $(document).ready(function() {
           reaction.dataset.count = result[key]['count'];
           if (result[key]['your_reaction']) {
             reaction.querySelector('span').classList.add("reaction-active");
-            post.querySelector('.reaction-btn').dataset.reaction = key;
+            if (reactionButton) { reactionButton.dataset.reaction = key; }
           }
         });
       }
@@ -137,7 +136,7 @@ $(document).ready(function() {
   posts.forEach(post => {
     getReactions(post);
   })
-
+  
   updateKnownReactions();
   if (!sessionStorage.getItem('knownReactions')) {updateKnownReactions();}
 })

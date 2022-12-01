@@ -22,6 +22,10 @@
             {% include './follow.html' %}
         {% endif %}
 
+        {% if user.is_superuser and not profile.is_superuser %}
+            {% include './shadowban.html' %}
+        {% endif %}
+
         <h3 id="profile-posts-header">{{ profile.username|title }}'s posts</h3>
         <div class="posts-view">
             {% for post in page_obj %}

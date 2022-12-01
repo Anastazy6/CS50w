@@ -45,7 +45,7 @@ $(document).ready(function () {
             'maxlength'  : 64
           }
         );
-
+          
         // Create an input field for the edited post's body and set it initial value and attributes
         let bodyField = document.createElement('textarea');
         bodyField.classList.add('post-edit-body');
@@ -61,7 +61,7 @@ $(document).ready(function () {
         // Fill the edit body textarea with the contents of the post and remove any <p> or </p> tags
         bodyField.value = body.innerHTML.replace(/<\/?p>/g, '')
                                         .replace(/<br(\s?\/)?>/g, '\n');        
-
+          
         // Resizes the textarea on input so that it can fit all its content without leaving
         //   too much empty space
         bodyField.addEventListener('input', function() {
@@ -87,8 +87,8 @@ $(document).ready(function () {
                 bodyField.innerHTML.slice(cursor);
           }
         })
-
-
+        
+        
         // Create a submit button for the form
         const saveButton = document.createElement('input');
         saveButton.classList.add('btn', 'btn-outline-secondary', 'btn-sm');
@@ -97,7 +97,7 @@ $(document).ready(function () {
             'value': 'Save'
           }
         );
-
+          
         // Add the input fields and the save/submit button to the form and then
         //   place the form at the beginning of the post
         editFormInputs.append(titleField);
@@ -107,7 +107,7 @@ $(document).ready(function () {
         // Hide the post's title and body so that the form appears to have taken their place
         title.style.display = "None";
         body.style.display  = "None";
-
+          
         editForm.onsubmit = function() {
           fetch(this.action, {
             method: 'POST',
@@ -129,7 +129,7 @@ $(document).ready(function () {
                               result['new_body'].replace(/\n{2,}/g, '</p><p>')
                                                 .replace(/\n/g,   '</br>') +
                               '</p>';
-
+          
             if (titleSpan.innerHTML === '') {
               titleSpan.innerHTML = 'No title';
               titleSpan.classList.remove('has-title');
@@ -138,13 +138,13 @@ $(document).ready(function () {
               titleSpan.classList.remove('no-title');
               titleSpan.classList.add   ('has-title');
             }
-
+            
             closeEditView();
         })
           // Prevent page reload on form submit
           return false;
         }
-
+        
       // If the post is currently being edited, clicking on the button will cancel
       //   the process and discard any changes
       } else {

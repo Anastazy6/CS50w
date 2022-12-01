@@ -9,8 +9,8 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ('author', 'title', 'body', 'timestamp')
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'email', 'first_name', 'last_name',\
-                    'date_joined', 'last_login', 'is_active',\
+    list_display = ('username', 'email', 'shadowbanned', 'first_name',\
+                    'last_name', 'date_joined', 'last_login', 'is_active',\
                     'is_staff', 'is_superuser')
 
 class ReactionCategoryAdmin(admin.ModelAdmin):

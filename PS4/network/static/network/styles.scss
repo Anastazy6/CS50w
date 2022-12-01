@@ -2,6 +2,7 @@ $navbar-light-brand-color: white;
 
 $main-z-index: 0;
 $papaj: #04022137;
+$shadowbanned: rgb(49, 0, 132);
 $default-font-size: 16px;
 
 $main-font: Helvetica, sans-serif;
@@ -58,6 +59,7 @@ svg {
   margin: auto;
   position: fixed;
   text-align: center;
+  top: 0%;
   z-index: $main-z-index + 1;
   /*background-color: rgba($color: ghostwhite, $alpha: 0.8);*/
   backdrop-filter: blur(2.137px);
@@ -66,7 +68,6 @@ svg {
 }
 
 #new-post-container, #reactions-interface-wrapper {
-  max-width: 600px;
   max-height: 450px;
   border: 1px solid black;
   background-color: ghostwhite;
@@ -74,6 +75,17 @@ svg {
   margin: auto;
   padding: 10px;
   z-index: $main-z-index + 2;
+}
+
+#new-post-container {
+  max-width: 600px;
+  top: 15%;
+  border-radius: 10px;
+}
+
+#reactions-interface-wrapper {
+  max-width: 350px;
+  top: 30%;
 }
 
 #new-post-body, #new-post-title {
@@ -125,6 +137,10 @@ svg {
   overflow-wrap: break-word;
   background-color: ghostwhite;
   box-shadow: 2px 4px 21.37px $papaj;
+}
+
+.post-shadowbanned {
+  box-shadow: 2px 4px 21.37px $shadowbanned;
 }
 
 @media screen and (max-width: 666px) {
@@ -285,6 +301,7 @@ input.like-button {
 
 #reactions-interface {
   display: flex;
+  justify-content: space-evenly;
 
   & .reaction-category :hover {
     transform:    scale(3);

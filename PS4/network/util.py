@@ -2,7 +2,7 @@ from .models import *
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
-import re
+from django.db.models import Q
 
 def is_following(follower, followed):
     '''
@@ -42,14 +42,14 @@ def paginate(content, page_number, paginate_by=10, user=None):
     
     paginator = Paginator(content, paginate_by)
     page_obj  = paginator.get_page(page_number)
-
+    
     print(f"Logged in user is {user}")
-
+    
     for page_item in page_obj:
         if hasattr(page_item, 'get_reactions'):
             page_item.reactions_data = page_item.get_reactions(user)
         #    print(f"\n{page_item.reactions_data}\n")
-
+    
     return {
         "paginator": paginator,    
         "page_obj" : page_obj
@@ -66,7 +66,7 @@ def require_method(request, method, status=400):
         return JsonResponse({"error": f"Request method must be one of the following:\
                             {', '.join(method)}."},
                             status=status)
-
+    
     if not request.method == method:
         return JsonResponse({"error": f"{method} request required"},
                             status=status)
@@ -77,12 +77,18 @@ def logged_in_user(request):
     '''
     return request.user if request.user.is_authenticated else None
 
-def get_post_if_exists(id):
+def get_object_if_exists(model, id):
+    '''
+    Returns an instance of model with given id if exists. Else returns False.
+    Parametres: 
+        model: specifies the database table from which you want to get the object
+        id:    primary key of the object
+    '''
     try:
-        post = Post.objects.get(pk=id)
+        object = model.objects.get(pk=id)
     except ObjectDoesNotExist:
         return False
-    return post
+    return object
     
 def get_reaction_if_exists(post_id=None, user_id=None):
     try: 
@@ -90,3 +96,13 @@ def get_reaction_if_exists(post_id=None, user_id=None):
     except ObjectDoesNotExist:
         return False
     return reaction
+
+def filter_shadowbans(request, posts):
+    '''
+    Prevents loading posts from shadowbanned users as long as the logged in user
+    is not a superuser (e.g. admin). Superusers get to see shadobanned users' posts
+    for the sake of moderation, unbanning etc.
+    '''
+    if request.user.is_superuser:
+        return posts
+    return posts.filter(Q(author__shadowbanned=False) | Q(author=request.user.id))

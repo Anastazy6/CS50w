@@ -32,7 +32,7 @@ $(document).ready(function () {
         .then(result => {
           followersCounter.innerHTML = result['followers'];
           followingCounter.innerHTML = result['following'];
-          followMethod.innerHTML     = result['follow_method'];
+          followMethod    .innerHTML = result['follow_method'];
         })
       }
     });

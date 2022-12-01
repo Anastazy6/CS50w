@@ -3,8 +3,8 @@ $(document).ready(function () {
     const newPostTitle = document.querySelector('#new-post-title');
     const newPostBody  = document.querySelector('#new-post-body');
     const newPostBtn   = document.querySelector('#new-post-btn');
-
-
+    
+    
     // Ensures that the input fields will be empty on loading the page
     newPostTitle.value = '';
     newPostBody.value  = '';
@@ -17,15 +17,15 @@ $(document).ready(function () {
     newPostBody.addEventListener('keydown', (key) => {
         if (key.key === 'Enter') {
             let cursor = newPostBody.selectionStart;
-
+            
             newPostBody.innerHTML =
                 newPostBody.innerHTML.slice(0, cursor) +
                 '\n' +
                 newPostBody.innerHTML.slice(cursor);
         }
     })
-
-
+    
+    
     $("#new-post-form").submit(function () {
         fetch("/new-post", {
             method : 'POST',

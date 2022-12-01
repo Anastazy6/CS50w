@@ -4,7 +4,7 @@ $(document).ready(function() {
   likeForms.forEach(likeForm => {
     const likeDiv      = likeForm.parentElement;
     const likesCounter = likeDiv.querySelector('.likes-counter');
-
+    
     likeForm.onsubmit = function() {
       fetch(this.action, {
         method: 'POST',
@@ -19,10 +19,10 @@ $(document).ready(function() {
       .then(result => {
         likesCounter.innerHTML = result['likes'] == 1 ? '1 like' : `${result['likes']} likes`;
       });
-
+      
       return false;
     } // end: likeForm.onsubmit
-
+    
   }) // end: likeForms.forEach
-
+  
 }) // end: $(document).ready

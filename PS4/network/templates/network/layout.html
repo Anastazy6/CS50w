@@ -16,7 +16,9 @@
         {% if user.is_authenticated %}
             <script src="{% static 'network/scripts/edit_posts.js' %}"></script>
             <script src="{% static 'network/scripts/like.js' %}"></script>
-            <script src="{% static 'network/scripts/new_post.js' %}"></script>
+            {% if user.is_superuser %}
+                <script src="{% static 'network/scripts/shadowban.js' %}"></script>
+            {% endif %}
         {% endif %}
         <script src="{% static 'network/scripts/util.js' %}"></script>
 

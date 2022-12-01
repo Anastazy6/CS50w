@@ -1,0 +1,7 @@
+<form id="shadowban-form" name="shadowban-form" action="">
+    {% csrf_token %}
+    <input hidden type="number" name="user_id" value="{{ profile.id }}">
+    <input type='submit' id="shadowban-button"
+    value="{% if profile.shadowbanned %}Remove shadowban{% else %}Shadowban{% endif %}">
+    
+</form>
